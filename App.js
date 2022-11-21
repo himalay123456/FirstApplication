@@ -2,7 +2,8 @@ import React, {useEffect} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 
 // Static imports
-import {Home} from './src/screens/index';
+import AuthNavigation from './src/navigation/authNavigation';
+
 const App = () => {
   useEffect(() => {
     SplashScreen.hide();
@@ -10,7 +11,7 @@ const App = () => {
 
   return (
     <>
-      <Home />
+      <AuthNavigation />
     </>
   );
 };
