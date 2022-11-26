@@ -2,6 +2,7 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {Formik} from 'formik';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 //Static imports
 import {Background, Button, Field} from '../../custom';
@@ -11,7 +12,7 @@ import loginValidation from '../../validations/login';
 const Login = props => {
   const loginHandler = formValues => {
     alert(JSON.stringify(formValues));
-    props.navigation.navigate('Dashboard');
+    AsyncStorage.setItem('token', 'Himalay');
   };
   return (
     <Background>
