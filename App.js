@@ -2,12 +2,13 @@ import React, {useEffect} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import {NavigationContainer} from '@react-navigation/native';
 import {Provider} from 'react-redux';
-
+import {PersistGate} from 'redux-persist/integration/react';
+import {persistStore} from 'redux-persist';
 // Static imports
 import RootNavigation from './src/navigation/rootNavigation';
-import createStore from './store';
+import store from './store';
 
-const store = createStore();
+const persistor = persistStore(store);
 
 const App = () => {
   useEffect(() => {
@@ -17,9 +18,11 @@ const App = () => {
   return (
     <>
       <Provider store={store}>
-        <NavigationContainer>
-          <RootNavigation />
-        </NavigationContainer>
+        <PersistGate loading={null} persistor={persistor}>
+          <NavigationContainer>
+            <RootNavigation />
+          </NavigationContainer>
+        </PersistGate>
       </Provider>
     </>
   );

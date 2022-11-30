@@ -1,7 +1,7 @@
 import {setTokenStart, setTokenSuccess, setTokenFail} from '../../actions';
-import {put, call, takeLatest} from 'redux-saga/effects';
+import {put, call, takeLatest, all} from 'redux-saga/effects';
 
-import actionLabels from '../../actionLabels';
+import * as actionLabels from '../../actionLabels';
 
 export function* setAuthToken() {
   try {
@@ -16,6 +16,6 @@ export function* setAuthToken() {
   }
 }
 
-export default function* root() {
-  yield [yield takeLatest(actionLabels.SET_AUTH_TOKEN_SAGA, setAuthToken)];
+export function* watchAuthentication() {
+  yield all([takeLatest(actionLabels.SET_AUTH_TOKEN_SAGA, setAuthToken)]);
 }

@@ -1,12 +1,12 @@
 import {combineReducers} from 'redux';
 import {persistReducer} from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import auth from './auth/index';
+import auth from './auth';
 
 const persistConfig = {
   key: 'root',
-  storage,
+  storage: AsyncStorage,
   // List of all reducers we don't want to persist
   blacklist: [],
   // List of all reducers we want to persist
@@ -31,7 +31,7 @@ const rootReducer = (state, action) => {
     state = undefined;
   }
 
-  return allReducers;
+  return persistedReducer(state, action);
 };
 
 export default rootReducer;

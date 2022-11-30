@@ -1,14 +1,21 @@
-// @flow
+import {createStore, applyMiddleware, compose} from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import {watchAuthentication} from './src/store/sagas/auth';
 
-import {combineReducers} from 'redux';
-import configureStore from './src/store';
-import rootSaga from './src/store/sagas';
-import authReducer from './src/store/reducer/auth/index';
+import rootReducer from './src/store/reducer';
+const NODE_ENV = 'development';
+const composeEnhancers =
+  (NODE_ENV === 'development'
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    : null) || compose;
 
-export default () => {
-  const rootReducer = combineReducers({
-    auth: authReducer,
-  });
+const sagaMiddleware = createSagaMiddleware();
 
-  return configureStore(rootReducer, rootSaga);
-};
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(sagaMiddleware)),
+);
+
+sagaMiddleware.run(watchAuthentication);
+
+export default store;
