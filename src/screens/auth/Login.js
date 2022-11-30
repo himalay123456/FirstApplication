@@ -2,17 +2,22 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {Formik} from 'formik';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useDispatch} from 'react-redux';
 
 //Static imports
 import {Background, Button, Field} from '../../custom';
 import {darkGreen} from '../../constants/color';
 import loginValidation from '../../validations/login';
+import {setTokenSaga} from '../../store/actions';
 
 const Login = props => {
+  const dispatch = useDispatch();
+
   const loginHandler = formValues => {
-    alert(JSON.stringify(formValues));
-    AsyncStorage.setItem('token', 'Himalay');
+    console.log('formValues', formValues);
+    dispatch(setTokenSaga('login'));
+    // alert(JSON.stringify(formValues));
+    // AsyncStorage.setItem('token', 'Himalay');
   };
   return (
     <Background>
@@ -27,7 +32,7 @@ const Login = props => {
           Login
         </Text>
         <Formik
-          initialValues={{email: '', password: ''}}
+          initialValues={{email: 'himalay@solulab.com', password: 'Test@12345'}}
           validationSchema={loginValidation}
           onSubmit={values => loginHandler(values)}>
           {({

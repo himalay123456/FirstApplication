@@ -1,8 +1,10 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
-import {Button} from '../custom';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {useDispatch} from 'react-redux';
 
+import {setTokenSaga} from '../store/actions';
 const Header = ({children}) => {
+  const dispatch = useDispatch();
   return (
     <View style={styles.mainBox}>
       <View style={styles.profileBox}>
@@ -10,7 +12,10 @@ const Header = ({children}) => {
           <Text style={styles.header1}>Welcome</Text>
           <Text style={styles.header2}>Himalay Shankar</Text>
         </View>
-        <Image source={require('../assets/user.png')} style={styles.avatar} />
+        <TouchableOpacity onPress={() => dispatch(setTokenSaga())}>
+          <Text style={styles.header1}>Logout</Text>
+        </TouchableOpacity>
+        {/* <Image source={require('../assets/user.png')} style={styles.avatar} /> */}
       </View>
       <View>{children}</View>
     </View>

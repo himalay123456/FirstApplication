@@ -36,6 +36,7 @@ export default (state = initialState, {type, payload}) => {
           ...state.isLoading,
           setToken: false,
         },
+        isLogin: false,
       };
     }
 

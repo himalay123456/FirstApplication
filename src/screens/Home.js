@@ -1,12 +1,9 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
-import {useSelector} from 'react-redux';
 
 import Header from '../custom/Header';
 
 const Home = props => {
-  const state = useSelector(state => state);
-  console.log('state', state);
   return (
     <Header>
       <View style={styles.selectBox}>

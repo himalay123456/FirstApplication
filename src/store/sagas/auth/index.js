@@ -1,16 +1,17 @@
 import {setTokenStart, setTokenSuccess, setTokenFail} from '../../actions';
-import {put, call, takeLatest, all} from 'redux-saga/effects';
+import {put, takeLatest, all} from 'redux-saga/effects';
 
 import * as actionLabels from '../../actionLabels';
 
-export function* setAuthToken() {
+export function* setAuthToken({payload}) {
+  console.log('pay', payload);
   try {
     yield put(setTokenStart());
-    const response = yield call(
-      'https://jsonplaceholder.typicode.com/todos/1',
-      '/food',
-    );
-    yield put(setTokenSuccess(response));
+    if (payload === 'login') {
+      yield put(setTokenSuccess());
+    } else {
+      yield put(setTokenFail());
+    }
   } catch (e) {
     yield put(setTokenFail(e.message));
   }
