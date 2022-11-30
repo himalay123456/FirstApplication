@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 
 import Header from '../custom/Header';
+
 const Home = props => {
   return (
     <Header>
